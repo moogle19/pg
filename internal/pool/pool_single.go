@@ -82,12 +82,9 @@ func (p *SingleConnPool) Put(cn *Conn) {
 }
 
 func (p *SingleConnPool) Remove(cn *Conn) {
-	defer func() {
-		if recover() != nil {
-			p.pool.Remove(cn)
-		}
-	}()
-	p.ch <- cn
+	if recover() != nil {
+		p.pool.Remove(cn)
+	}
 }
 
 func (p *SingleConnPool) Len() int {
