@@ -2,46 +2,46 @@ package orm
 
 const (
 	// Date / Time
-	timestampType   = "timestamp"           // Timestamp without a time zone
-	timestamptzType = "timestamptz"         // Timestamp with a time zone
-	dateType        = "date"                // Date
-	timeType        = "time"                // Time without a time zone
-	timetzType      = "time with time zone" // Time with a time zone
-	intervalType    = "interval"            // Time Interval
+	pgTypeTimestamp   = "timestamp"           // Timestamp without a time zone
+	pgTypeTimestampTz = "timestamptz"         // Timestamp with a time zone
+	pgTypeDate        = "date"                // Date
+	pgTypeTime        = "time"                // Time without a time zone
+	pgTypeTimeTz      = "time with time zone" // Time with a time zone
+	pgTypeInterval    = "interval"            // Time Interval
 
 	// Network Addresses
-	inetType    = "inet"    // IPv4 or IPv6 hosts and networks
-	cidrType    = "cidr"    // IPv4 or IPv6 networks
-	macaddrType = "macaddr" // MAC adresses
+	pgTypeInet    = "inet"    // IPv4 or IPv6 hosts and networks
+	pgTypeCidr    = "cidr"    // IPv4 or IPv6 networks
+	pgTypeMacaddr = "macaddr" // MAC adresses
 
 	// Boolean
-	booleanType = "boolean"
+	pgTypeBoolean = "boolean"
 
 	// Numeric Types
 
 	// Floating Point Types
-	realType            = "real"             // 4 byte floating point (6 digit precision)
-	doublePrecisionType = "double precision" // 8 byte floating point (15 digit precision)
+	pgTypeReal            = "real"             // 4 byte floating point (6 digit precision)
+	pgTypeDoublePrecision = "double precision" // 8 byte floating point (15 digit precision)
 
 	// Integer Types
-	smallintType = "smallint" // 2 byte integer
-	integerType  = "integer"  // 4 byte integer
-	bigintType   = "bigint"   // 8 byte integer
+	pgTypeSmallint = "smallint" // 2 byte integer
+	pgTypeInteger  = "integer"  // 4 byte integer
+	pgTypeBigint   = "bigint"   // 8 byte integer
 
 	// Serial Types
-	smallserialType = "smallserial" // 2 byte autoincrementing integer
-	serialType      = "serial"      // 4 byte autoincrementing integer
-	bigserialType   = "bigserial"   // 8 byte autoincrementing integer
+	pgTypeSmallserial = "smallserial" // 2 byte autoincrementing integer
+	pgTypeSerial      = "serial"      // 4 byte autoincrementing integer
+	pgTypeBigserial   = "bigserial"   // 8 byte autoincrementing integer
 
 	// Character Types
-	varcharType = "varchar" // variable length string with limit
-	charType    = "char"    // fixed length string (blank padded)
-	textType    = "text"    // variable length string without limit
+	pgTypeVarchar = "varchar" // variable length string with limit
+	pgTypeChar    = "char"    // fixed length string (blank padded)
+	pgTypeText    = "text"    // variable length string without limit
 
 	// JSON Types
-	jsonType  = "json"  // text representation of json data
-	jsonbType = "jsonb" // binary representation of json data
+	pgTypeJSON  = "json"  // text representation of json data
+	pgTypeJSONB = "jsonb" // binary representation of json data
 
 	// Binary Data Types
-	byteaType = "bytea" // binary string
+	pgTypeBytea = "bytea" // binary string
 )

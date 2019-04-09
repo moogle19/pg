@@ -72,7 +72,7 @@ func (q *createTableQuery) AppendQuery(b []byte) ([]byte, error) {
 		b = append(b, field.Column...)
 		b = append(b, " "...)
 		if q.opt != nil && q.opt.Varchar > 0 &&
-			field.SQLType == textType && !field.HasFlag(customTypeFlag) {
+			field.SQLType == pgTypeText && !field.HasFlag(customTypeFlag) {
 			b = append(b, "varchar("...)
 			b = strconv.AppendInt(b, int64(q.opt.Varchar), 10)
 			b = append(b, ")"...)

@@ -29,7 +29,7 @@ const (
 	discardUnknownColumns
 )
 
-var gotimeType = reflect.TypeOf((*time.Time)(nil)).Elem()
+var timeType = reflect.TypeOf((*time.Time)(nil)).Elem()
 var nullTimeType = reflect.TypeOf((*types.NullTime)(nil)).Elem()
 var ipType = reflect.TypeOf((*net.IP)(nil)).Elem()
 var ipNetType = reflect.TypeOf((*net.IPNet)(nil)).Elem()
@@ -461,7 +461,7 @@ func (t *Table) newField(f reflect.StructField, index []int) *Field {
 
 	if _, ok := pgTag.Options["soft_delete"]; ok {
 		switch field.Type {
-		case gotimeType, nullTimeType:
+		case timeType, nullTimeType:
 			t.SoftDeleteField = field
 		default:
 			err := fmt.Errorf(
@@ -776,49 +776,49 @@ func fieldSQLType(field *Field, pgTag, sqlTag *tag.Tag) string {
 
 func sqlType(typ reflect.Type) string {
 	switch typ {
-	case gotimeType:
-		return timestamptzType
+	case timeType:
+		return pgTypeTimestampTz
 	case ipType:
-		return inetType
+		return pgTypeInet
 	case ipNetType:
-		return cidrType
+		return pgTypeCidr
 	case nullBoolType:
-		return booleanType
+		return pgTypeBoolean
 	case nullFloatType:
-		return doublePrecisionType
+		return pgTypeDoublePrecision
 	case nullIntType:
-		return bigintType
+		return pgTypeBigint
 	case nullStringType:
-		return textType
+		return pgTypeText
 	case jsonRawMessageType:
-		return jsonbType
+		return pgTypeJSONB
 	}
 
 	switch typ.Kind() {
 	case reflect.Int8, reflect.Uint8, reflect.Int16:
-		return smallintType
+		return pgTypeSmallint
 	case reflect.Uint16, reflect.Int32:
-		return integerType
+		return pgTypeInteger
 	case reflect.Uint32, reflect.Int64, reflect.Int:
-		return bigintType
+		return pgTypeBigint
 	case reflect.Uint, reflect.Uint64:
 		// The lesser of two evils.
-		return bigintType
+		return pgTypeBigint
 	case reflect.Float32:
-		return realType
+		return pgTypeReal
 	case reflect.Float64:
-		return doublePrecisionType
+		return pgTypeDoublePrecision
 	case reflect.Bool:
-		return booleanType
+		return pgTypeBoolean
 	case reflect.String:
-		return textType
+		return pgTypeText
 	case reflect.Map, reflect.Struct:
-		return jsonbType
+		return pgTypeJSONB
 	case reflect.Array, reflect.Slice:
 		if typ.Elem().Kind() == reflect.Uint8 {
-			return byteaType
+			return pgTypeBytea
 		}
-		return jsonbType
+		return pgTypeJSONB
 	default:
 		return typ.Kind().String()
 	}
@@ -826,12 +826,12 @@ func sqlType(typ reflect.Type) string {
 
 func pkSQLType(s string) string {
 	switch s {
-	case smallintType:
-		return smallserialType
-	case integerType:
-		return serialType
-	case bigintType:
-		return bigserialType
+	case pgTypeSmallint:
+		return pgTypeSmallserial
+	case pgTypeInteger:
+		return pgTypeSerial
+	case pgTypeBigint:
+		return pgTypeBigserial
 	}
 	return s
 }
