@@ -1,6 +1,11 @@
 dist: trusty
 language: go
 
+go_import_path: github.com/go-pg/pg
+
+env:
+  - GO111MODULE=on
+
 addons:
   postgresql: "9.6"
 
