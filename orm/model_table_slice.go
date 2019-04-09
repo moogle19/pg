@@ -167,7 +167,7 @@ func (m *sliceTableModel) setSoftDeleteField() {
 	var value reflect.Value
 	if m.sliceOfPtr {
 		value = reflect.ValueOf(&now)
-	} else if field.Type == timeType {
+	} else if field.Type == gotimeType {
 		value = reflect.ValueOf(now)
 	} else {
 		value = reflect.ValueOf(types.NullTime{Time: now})

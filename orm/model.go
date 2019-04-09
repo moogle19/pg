@@ -74,13 +74,13 @@ func NewModel(values ...interface{}) (Model, error) {
 
 	switch v.Kind() {
 	case reflect.Struct:
-		if v.Type() != timeType {
+		if v.Type() != gotimeType {
 			return newStructTableModelValue(v), nil
 		}
 	case reflect.Slice:
 		typ := v.Type()
 		elemType := indirectType(typ.Elem())
-		if elemType.Kind() == reflect.Struct && elemType != timeType {
+		if elemType.Kind() == reflect.Struct && elemType != gotimeType {
 			return newSliceTableModel(v, elemType), nil
 		} else {
 			return newSliceModel(v, elemType), nil

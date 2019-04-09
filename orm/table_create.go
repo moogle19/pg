@@ -1,8 +1,9 @@
 package orm
 
 import (
-	"github.com/go-pg/pg/types"
 	"strconv"
+
+	"github.com/go-pg/pg/types"
 )
 
 type CreateTableOptions struct {
@@ -71,7 +72,7 @@ func (q *createTableQuery) AppendQuery(b []byte) ([]byte, error) {
 		b = append(b, field.Column...)
 		b = append(b, " "...)
 		if q.opt != nil && q.opt.Varchar > 0 &&
-			field.SQLType == "text" && !field.HasFlag(customTypeFlag) {
+			field.SQLType == textType && !field.HasFlag(customTypeFlag) {
 			b = append(b, "varchar("...)
 			b = strconv.AppendInt(b, int64(q.opt.Varchar), 10)
 			b = append(b, ")"...)
